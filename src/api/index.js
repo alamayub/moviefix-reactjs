@@ -11,9 +11,12 @@ export const fetchGenreListAPI = async () => {
 }
 
 // fetch all movie list
-export const fetchAllMovieListAPI = async () => {
+export const fetchAllMovieListAPI = async (year = 2012, search = null) => {
     try {
-        const url = `${process.env.REACT_APP_BASE_URL}discover/movie?api_key=${process.env.REACT_APP_API_KEY}&sort_by=popularity.desc&primary_release_year=2023&page=1&vote_count.gte=100`;
+        let url = `${process.env.REACT_APP_BASE_URL}discover/movie?api_key=${process.env.REACT_APP_API_KEY}&sort_by=popularity.desc&primary_release_year=${year}&page=1&vote_count.gte=100`;
+        if (search != null) {
+            url = `${process.env.REACT_APP_BASE_URL}keyword/${search}/movies?api_key=${process.env.REACT_APP_API_KEY}`;
+        }
         const res = await fetch(url)
         const json = await res.json()
         return json['results']

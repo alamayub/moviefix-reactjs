@@ -3,20 +3,9 @@ import {
     SET_GENRES_LIST,
     SET_MOVIES_LIST,
     SET_SELECT_GENRE,
+    SET_YEAR,
+    SET_SEARCH,
 } from './store-actions-contants'
-
-import { fetchGenreListAPI, fetchAllMovieListAPI } from '../api/index'
-
-// fetch genres & movies list
-export const fetchGenreList = async (dispatch) => {
-     fetchGenreListAPI().then(res => {
-        dispatch(setGenresList(res))
-    });
-    await fetchAllMovieListAPI().then(res => {
-        dispatch(setMoviesList(res));
-    });
-    dispatch(setLoading(false))
-}
 
 export const setLoading = (loading) => {
     return {
@@ -44,5 +33,23 @@ export const setSelectGenre = (genre) => {
     return {
         type: SET_SELECT_GENRE,
         genre: genre,
+    }
+}
+
+// set year
+export const setYear = (year) => {
+    console.log('year ', year)
+    return {
+        type: SET_YEAR,
+        year: year,
+    }
+}
+
+// set search
+export const setSearch = (search) => {
+    console.log(search)
+    return {
+        type: SET_SEARCH,
+        search: search,
     }
 }

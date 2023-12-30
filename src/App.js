@@ -1,28 +1,45 @@
 import { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux'
-import { fetchGenreList } from './store/storeActions'
+import { connect } from 'react-redux'
 import GenreList from './components/GenreList'
-import MovieCard from './components/MovieCard'
-const App = () => {
-  const dispatch = useDispatch()
-  const loading = useSelector(state => state.loading);
-  const movies = useSelector(state => state.movies);
+import MoviesList from './components/MoviesList'
+import SearchComponent from './components/SearchComponent'
+import { setYear } from './store/storeActions';
+const App = ({ year, setYear }) => {
+  const onScroll = () => {
+    if (document.scrollingElement.scrollTop === 0) {
+      let x = year--;
+      setYear(x);
+    }
+    if ((window.pageYOffset + window.innerHeight) >= document.documentElement.scrollHeight) {
+      let x = year++;
+      setYear(x);
+    }
+  }
+
 
   useEffect(() => {
-    fetchGenreList(dispatch);
+    window.addEventListener("scroll", onScroll);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <div className="App">
-      {loading ? <p>Loading...</p> : <main>
+      <main>
+        <SearchComponent year={year} />
         <GenreList />
-        <div className="movies__list">
-          {movies && movies.lenght > 0 ? movies.map(movie => <MovieCard key={movie['id']} movie={movie} />) : <p>No movies found</p>}
-        </div>
-      </main>}
+        <MoviesList />
+      </main>
     </div>
   );
 }
 
-export default App
+const mapStateToProps = (state) => ({
+  year: state.year,
+  search: state.search,
+})
+
+const mapDispatchToProps = (dispatch) => ({
+  setYear: year => dispatch(setYear(year))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(App)
