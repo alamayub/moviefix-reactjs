@@ -1,9 +1,9 @@
-import MiniGenreList from './MiniGenreList'
+// import MiniGenreList from './MiniGenreList'
 const MovieCard = ({ movie }) => {
     return (
         <div className="movie__card" style={{ backgroundImage: `url("${process.env.REACT_APP_IMAGE_URL}${movie['poster_path']}")` }}>
             <div className="movie__card__content">
-                <MiniGenreList ids={movie['genre_ids']} />
+                {/* <MiniGenreList ids={movie['genre_ids']} /> */}
                 <h6>{movie['title']}</h6>
                 <p className="paragraph">- {movie['overview']}</p>
                 <p>
