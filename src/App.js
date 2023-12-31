@@ -2,9 +2,8 @@ import { useEffect } from 'react';
 import { connect } from 'react-redux'
 import Headerbar from './components/Headerbar'
 import MoviesList from './components/MoviesList'
-import Loader from './components/Loader'
 import { setYear } from './store/storeActions';
-const App = ({ loading, year, setYear }) => {
+const App = ({ year, setYear }) => {
   const onScroll = () => {
     if (document.scrollingElement.scrollTop === 0) {
       let x = year--;
@@ -25,14 +24,13 @@ const App = ({ loading, year, setYear }) => {
     <div className="App">
       <Headerbar year={year} />
       <main>
-        {loading ? <Loader /> : <MoviesList />}
+        <MoviesList />
       </main>
     </div>
   );
 }
 
 const mapStateToProps = (state) => ({
-  loading: state.loading,
   year: state.year,
   search: state.search,
 })
