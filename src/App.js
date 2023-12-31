@@ -1,10 +1,10 @@
 import { useEffect } from 'react';
 import { connect } from 'react-redux'
-import GenreList from './components/GenreList'
+import Headerbar from './components/Headerbar'
 import MoviesList from './components/MoviesList'
-import SearchComponent from './components/SearchComponent'
+import Loader from './components/Loader'
 import { setYear } from './store/storeActions';
-const App = ({ year, setYear }) => {
+const App = ({ loading, year, setYear }) => {
   const onScroll = () => {
     if (document.scrollingElement.scrollTop === 0) {
       let x = year--;
@@ -16,7 +16,6 @@ const App = ({ year, setYear }) => {
     }
   }
 
-
   useEffect(() => {
     window.addEventListener("scroll", onScroll);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -24,16 +23,16 @@ const App = ({ year, setYear }) => {
 
   return (
     <div className="App">
+      <Headerbar year={year} />
       <main>
-        <SearchComponent year={year} />
-        <GenreList />
-        <MoviesList />
+        {loading ? <Loader /> : <MoviesList />}
       </main>
     </div>
   );
 }
 
 const mapStateToProps = (state) => ({
+  loading: state.loading,
   year: state.year,
   search: state.search,
 })

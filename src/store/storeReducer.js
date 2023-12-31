@@ -30,6 +30,7 @@ const storeReducer = (state = initState, action) => {
         case SET_MOVIES_LIST:
             return {
                 ...state,
+                loading: false,
                 movies: action.movies
             }
         case SET_SELECT_GENRE:

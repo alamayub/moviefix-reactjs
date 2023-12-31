@@ -8,6 +8,7 @@ import {
 } from './store-actions-contants'
 
 export const setLoading = (loading) => {
+    console.log(loading)
     return {
         type: SET_LOADING,
         loading: loading,
@@ -38,7 +39,6 @@ export const setSelectGenre = (genre) => {
 
 // set year
 export const setYear = (year) => {
-    console.log('year ', year)
     return {
         type: SET_YEAR,
         year: year,
@@ -47,7 +47,6 @@ export const setYear = (year) => {
 
 // set search
 export const setSearch = (search) => {
-    console.log(search)
     return {
         type: SET_SEARCH,
         search: search,

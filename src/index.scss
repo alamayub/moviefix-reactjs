@@ -15,119 +15,149 @@
   display: none;
 }
 
-// main body
-main {
+// App css
+.App {
   max-width: 460px;
   margin: 0 auto;
-  padding: 12px;
-  // search component
-  .search__component {
-    display: flex;
-    gap: 12px;
-    margin-bottom: 12px;
-    align-items: center;
-    input {
-      width: 100%;
-      outline: none;
-      border-radius: 4px;
-      padding: 6px 12px;
-      border: .5px solid rgba(0, 0, 0, 0.25);
+  padding: 0 12px;
+  display: flex;
+  flex-direction: column;
+
+  // header
+  header {
+    z-index: 1;
+    padding: 12px 0;
+    background-color: white;
+
+    // search component
+    .search__component {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 8px;
+      align-items: center;
+
+      input {
+        width: 100%;
+        outline: none;
+        border-radius: 4px;
+        padding: 6px 12px;
+        border: .5px solid rgba(0, 0, 0, 0.25);
+      }
+
+      p {
+        color: black !important;
+      }
     }
-    p {
-      color: black !important;
-    }
-  }
 
-  /* genre list css */
-  .genre__lists {
-    display: flex;
-    gap: 8px;
-    white-space: nowrap;
-    overflow-x: scroll;
+    /* genre list css */
+    .genre__lists {
+      display: flex;
+      gap: 8px;
+      white-space: nowrap;
+      overflow-x: scroll;
 
-    .genre__card {
-      font-size: 10px;
-      padding: 3px 6px;
-      border-radius: 4px;
-      color: white;
-      text-transform: uppercase;
-      font-weight: 600;
-    }
-  }
-
-  /* movies list css */
-  .movies__list {
-    margin-top: 12px;
-    display: grid;
-    gap: 12px;
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-
-    /* movie card css */
-    .movie__card {
-      height: 200px;
-      border-radius: 6px;
-      overflow: hidden;
-      background-size: cover;
-      background-repeat: no-repeat;
-      background-position: center center;
-      position: relative;
-
-      .movie__card__content {
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        background-color: rgba(0, 0, 0, 0.4);
-        padding: 6px 8px;
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-end;
-        gap: 4px;
+      .genre__card {
+        font-size: 10px;
+        padding: 3px 6px;
+        border-radius: 4px;
         color: white;
-
-        h6 {
-          font-weight: 500;
-          font-size: 14px;
-        }
-
-        p {
-          font-size: 10px;
-
-          span {
-            color: orange;
-            margin-right: 4px;
-          }
-        }
-
-        // mini genre list 
-        .mini__genre__list {
-          display: flex;
-          gap: 2px;
-          white-space: nowrap;
-          overflow-x: scroll;
-
-          .mini__genre__card {
-            font-size: 8px;
-            font-weight: 500;
-            height: 1;
-            background-color: rgba(255, 0, 0, 0.25);
-            color: white;
-            border-radius: 10px;
-            padding: 3px 6px;
-            text-transform: uppercase;
-          }
-        }
+        text-transform: uppercase;
+        font-weight: 600;
       }
     }
   }
 
+  // main body
+  main {
+    overflow: hidden;
+    position: relative;
+
+    /* movies list css */
+    .movies__list {
+      display: grid;
+      gap: 12px;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      padding-bottom: 12px;
+
+      /* movie card css */
+      .movie__card {
+        height: 200px;
+        border-radius: 6px;
+        overflow: hidden;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center center;
+        position: relative;
+        animation: zoom-in-zoom-out 500ms ease-in-out;
+
+        .movie__card__content {
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          background-color: rgba(0, 0, 0, 0.4);
+          padding: 6px 8px;
+          display: flex;
+          flex-direction: column;
+          justify-content: flex-end;
+          gap: 4px;
+          color: white;
+
+          h6 {
+            font-weight: 500;
+            font-size: 14px;
+          }
+
+          p {
+            font-size: 10px;
+
+            span {
+              color: orange;
+              margin-right: 4px;
+            }
+          }
+
+          // mini genre list 
+          .mini__genre__list {
+            display: flex;
+            gap: 2px;
+            white-space: nowrap;
+            overflow-x: scroll;
+
+            .mini__genre__card {
+              font-size: 8px;
+              font-weight: 500;
+              height: 1;
+              background-color: rgba(255, 0, 0, 0.25);
+              color: white;
+              border-radius: 10px;
+              padding: 3px 6px;
+              text-transform: uppercase;
+            }
+          }
+        }
+      }
+    }
+
+  }
+
+  // paragraph elipse after 3 lines
+  .paragraph {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+  }
 }
 
-// paragraph elipse after 3 lines
-.paragraph {
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 3;
+// movie card transition
+@keyframes zoom-in-zoom-out {
+  0% {
+    transform: scale(.5, .5);
+  }
+
+  100% {
+    transform: scale(1, 1);
+  }
 }

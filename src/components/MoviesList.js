@@ -6,8 +6,12 @@ import { useEffect } from 'react'
 
 const MoviesList = ({ search, year, movies, setMoviesList }) => {
 
+    const fetchAllMovies = async () => {
+        await fetchAllMovieListAPI(year, search).then(res => setMoviesList(res));
+    }
+
     useEffect(() => {
-        fetchAllMovieListAPI(year, search).then(res => setMoviesList(res));
+        fetchAllMovies();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [year, search]);
 
